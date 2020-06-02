@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+    oidc-reverse-proxy :
+        container_name: oidc-reverse-proxy
+        build:  
+            context: ./
+        image: datastyx/oidc-reverse-proxy:1.0.0
+        volumes:
+            - ./config:/config
+            - ./script:/script
+        ports:
+            - "80:80"
+        environment: 
+            DISCOVERY_URL: http://192.168.56.103:8888/auth/realms/master/.well-known/openid-configuration
+            CLIENT_ID: test-reverse-oidc
+            REDIRECT_URI_SCHEME: http
+            AFTER_LOGOUT_URI: http://192.168.56.103:8888/auth/realms/master/protocol/openid-connect/logout?redirect_uri=http://datastyx/b78292ec-175a-411d-ad1b-d9ab70e98a7e/html/logoutSuccessful
+            BACKEND_HOST: 192.168.56.1:8081
