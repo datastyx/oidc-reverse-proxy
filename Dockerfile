@@ -6,8 +6,7 @@ RUN apk add --no-cache openssl-dev
 RUN apk add --no-cache git
 RUN apk add --no-cache gcc
 RUN luarocks install lua-resty-openidc
-
-VOLUME $PWD/config:/config
+COPY config /config
 COPY ./script .
 
 ENV DNS_RESOLVER=1.1.1.1
