@@ -30,5 +30,6 @@ ENV LOGOUT_PATH="/auth/logout"
 
 #The backend base url is the proxied service e.g. backend:8080
 #ENV BACKEND_HOST
+RUN chmod u+x ./launch.sh
 
 ENTRYPOINT ["./launch.sh"]
